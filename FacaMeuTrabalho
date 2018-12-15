@@ -1,0 +1,28 @@
+#! /bin/bash
+k=30
+l=10
+nomeInstancia=("instancias/01.txt" "instancias/02.txt" "instancias/03.txt" "instancias/04.txt" "instancias/11.txt" "instancias/12.txt" "instancias/13.txt" "instancias/16.txt" "instancias/17.txt" "instancias/18.txt")
+for(( j=0;j<l;j++))
+do
+rm 'fim/Reativos'$Reativos${nomeInstancia[j]}
+rm 'fim/Randomicos'${nomeInstancia[j]}
+rm 'saidaTempos'${nomeInstancia[j]}
+rm 'fim/gulosos'${nomeInstancia[j]}
+echo  ${nomeInstancia[j]}
+echo "guloso"
+	/usr/bin/time -f "%E" -o 'saidaTempos'${nomeInstancia[j]} -a /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos g ${nomeInstancia[j]} >> 'fim/gulosos'${nomeInstancia[j]} ; /usr/bin/time -f "%E" -o 'saidaTempos'${nomeInstancia[j+1]} -a /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos g ${nomeInstancia[j+1]} >> 'fim/gulosos'${nomeInstancia[j+1]};/usr/bin/time -f "%E" -o 'saidaTempos'${nomeInstancia[j+2]} -a /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos g ${nomeInstancia[j+2]} >> 'fim/gulosos'${nomeInstancia[j+2]};/usr/bin/time -f "%E" -o 'saidaTempos'${nomeInstancia[j+3]} -a /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos g ${nomeInstancia[j+3]} >> 'fim/gulosos'${nomeInstancia[j+3]}
+echo "Randomico"
+for(( i = 1 ; i<=k ; i++ ))
+do	
+	echo "execucao" $i 
+/usr/bin/time -f "%E" -o 'saidaTempos'${nomeInstancia[j]}  -a /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos r  ${nomeInstancia[j]} >> 'fim/Randomicos'${nomeInstancia[j]}
+done
+media_desvio 'fim/Randomicos'${nomeInstancia[j]} >> 'fim/Randomicos'${nomeInstancia[j]}
+echo "REATIVO"
+for((i=1;i<=k;i++))
+do	
+	echo "execucao" $i 
+/usr/bin/time -f "%E"   -o 'saidaTempos'${nomeInstancia[j]} -a   /home/user/Documentos/importante/trabalhoGrafos/Trabalho\ Grafos/dist/Release/GNU-Linux/trabalho_grafos R ${nomeInstancia[j]}  >> 'fim/Reativos'${nomeInstancia[j]}
+done
+media_desvio 'fim/Reativos'${nomeInstancia[j]} >> 'fim/Reativos'${nomeInstancia[j]}
+done

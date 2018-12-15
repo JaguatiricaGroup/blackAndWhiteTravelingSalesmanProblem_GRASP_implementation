@@ -1,0 +1,15 @@
+iniciando Grafo
+vertice 1
+arestas:  5(2)  2(4) 
+vertice 2
+arestas:  5(3) 
+vertice 3
+arestas: 
+vertice 4
+arestas:  5(5) 
+vertice 5
+arestas:  3(1) 
+vertice 6
+arestas:  7(6) 
+vertice 7
+arestas: 
